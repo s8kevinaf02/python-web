@@ -8,10 +8,13 @@ WORKDIR /app
 RUN apt update -y && apt install -y python3 python3-pip
 
 # Copy the Python application code to the working directory
-COPY . /app
+COPY requirements.txt /app
 
 # Install Python dependencies
 RUN pip3 install -r requirements.txt
+
+# Copy the entire content
+COPY . .
 
 # Set the entrypoint and cmd for the container
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
